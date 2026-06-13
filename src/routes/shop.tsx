@@ -72,7 +72,7 @@ function ShopPage() {
   const [localQ, setLocalQ] = useState(search.q ?? "");
 
   const applySearch = useCallback(() => {
-    navigate({ search: (prev) => ({ ...prev, q: localQ || undefined, page: 1 }) });
+    navigate({ search: (prev: ShopSearch) => ({ ...prev, q: localQ || undefined, page: 1 }) });
   }, [localQ, navigate]);
 
   const clearFilters = useCallback(() => {
