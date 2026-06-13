@@ -1,7 +1,10 @@
+import { Link } from "@tanstack/react-router";
 import { formatToman } from "@/lib/fa";
 import { ShoppingCart } from "lucide-react";
+import { useCart } from "@/lib/cart-context";
 
 type Props = {
+  productId: string;
   title_fa: string;
   brand: string | null;
   price: number;
@@ -10,10 +13,25 @@ type Props = {
   slug: string;
 };
 
-export function ProductCard({ title_fa, brand, price, compare_at_price, images }: Props) {
+export function ProductCard({ productId, title_fa, brand, price, compare_at_price, images, slug }: Props) {
+  const { addItem } = useCart();
   const discount = compare_at_price ? Math.round(((compare_at_price - price) / compare_at_price) * 100) : 0;
+
+  const handleAdd = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    addItem({
+      productId,
+      slug,
+      title_fa,
+      brand,
+      price,
+      image: images[0] ?? "",
+    });
+  };
+
   return (
-    <article className="group relative overflow-hidden rounded-2xl glass transition-all duration-500 hover:-translate-y-1 hover:shadow-elegant hover:border-white/25">
+    <Link to="/product/$slug" params={{ slug }} className="group block overflow-hidden rounded-2xl glass transition-all duration-500 hover:-translate-y-1 hover:shadow-elegant hover:border-white/25">
       <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-white/5 to-transparent">
         <img
           src={images[0] ?? "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600"}
@@ -27,7 +45,10 @@ export function ProductCard({ title_fa, brand, price, compare_at_price, images }
           </span>
         )}
         <div className="absolute inset-x-0 bottom-0 z-10 flex h-28 translate-y-full flex-col justify-end bg-gradient-to-t from-black/90 via-black/50 to-transparent p-4 transition-all duration-500 group-hover:translate-y-0">
-          <button className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-sm font-bold text-primary-foreground shadow-lg transition hover:bg-primary/90 hover:scale-[1.02] active:scale-95">
+          <button
+            onClick={handleAdd}
+            className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-sm font-bold text-primary-foreground shadow-lg transition hover:bg-primary/90 hover:scale-[1.02] active:scale-95"
+          >
             <ShoppingCart className="h-4 w-4" />
             افزودن به سبد
           </button>
@@ -46,6 +67,6 @@ export function ProductCard({ title_fa, brand, price, compare_at_price, images }
           </div>
         </div>
       </div>
-    </article>
+    </Link>
   );
 }
