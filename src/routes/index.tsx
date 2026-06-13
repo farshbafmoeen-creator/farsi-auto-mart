@@ -16,7 +16,7 @@ const homeQuery = queryOptions({
       getCategories(),
       getCarMakes(),
     ]);
-    return { featured, all, categories, makes };
+    return { featured: featured.rows, all: all.rows, categories, makes };
   },
 });
 
