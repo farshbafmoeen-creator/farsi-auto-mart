@@ -116,8 +116,10 @@ function HomePage() {
         </div>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-8">
           {data.categories.map((c, i) => (
-            <button
+            <Link
               key={c.id}
+              to="/shop"
+              search={{ category: c.slug, page: 1 }}
               className="group flex flex-col items-center gap-3 rounded-2xl glass p-5 text-center transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-elegant animate-fade-up"
               style={{ animationDelay: `${i * 0.05}s` }}
             >
@@ -125,8 +127,9 @@ function HomePage() {
                 {CATEGORY_ICONS[c.slug] ?? "🔩"}
               </div>
               <span className="text-xs font-bold">{c.name_fa}</span>
-            </button>
+            </Link>
           ))}
+
         </div>
       </section>
 
