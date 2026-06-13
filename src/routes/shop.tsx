@@ -136,7 +136,7 @@ function ShopPage() {
               <label className="mb-3 block text-sm font-bold">دسته‌بندی</label>
               <div className="space-y-1">
                 <button
-                  onClick={() => navigate({ search: (prev) => ({ ...prev, category: undefined, page: 1 }) })}
+                  onClick={() => navigate({ search: (prev: ShopSearch) => ({ ...prev, category: undefined, page: 1 }) })}
                   className={`flex w-full items-center gap-2 rounded-xl px-3 py-2 text-sm transition ${
                     !search.category ? "bg-primary/15 text-primary font-bold" : "hover:bg-white/5"
                   }`}
