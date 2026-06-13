@@ -147,7 +147,7 @@ function ShopPage() {
                   <button
                     key={c.id}
                     onClick={() =>
-                      navigate({ search: (prev) => ({ ...prev, category: c.slug, page: 1 }) })
+                      navigate({ search: (prev: ShopSearch) => ({ ...prev, category: c.slug, page: 1 }) })
                     }
                     className={`flex w-full items-center gap-2 rounded-xl px-3 py-2 text-sm transition ${
                       search.category === c.slug ? "bg-primary/15 text-primary font-bold" : "hover:bg-white/5"
