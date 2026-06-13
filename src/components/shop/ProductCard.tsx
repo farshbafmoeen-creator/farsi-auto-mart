@@ -26,8 +26,8 @@ export function ProductCard({ title_fa, brand, price, compare_at_price, images }
             {formatToman(discount)}٪ تخفیف
           </span>
         )}
-        <div className="absolute inset-x-0 bottom-0 translate-y-full bg-gradient-to-t from-black/80 to-transparent p-4 transition-transform duration-500 group-hover:translate-y-0">
-          <button className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-sm font-bold text-primary-foreground transition hover:bg-primary/90">
+        <div className="absolute inset-x-0 bottom-0 z-10 flex h-28 translate-y-full flex-col justify-end bg-gradient-to-t from-black/90 via-black/50 to-transparent p-4 transition-all duration-500 group-hover:translate-y-0">
+          <button className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-sm font-bold text-primary-foreground shadow-lg transition hover:bg-primary/90 hover:scale-[1.02] active:scale-95">
             <ShoppingCart className="h-4 w-4" />
             افزودن به سبد
           </button>
