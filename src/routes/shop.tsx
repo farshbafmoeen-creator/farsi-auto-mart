@@ -97,7 +97,7 @@ function ShopPage() {
             <Select
               value={search.sort ?? "newest"}
               onValueChange={(v) =>
-                navigate({ search: (prev) => ({ ...prev, sort: v as ShopSearch["sort"], page: 1 }) })
+                navigate({ search: (prev: ShopSearch) => ({ ...prev, sort: v as ShopSearch["sort"], page: 1 }) })
               }
             >
               <SelectTrigger className="w-44 glass">
