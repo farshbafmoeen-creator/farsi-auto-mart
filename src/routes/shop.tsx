@@ -214,7 +214,7 @@ function ShopPage() {
                       size="sm"
                       disabled={search.page >= totalPages}
                       onClick={() =>
-                        navigate({ search: (prev) => ({ ...prev, page: (prev.page ?? 1) + 1 }) })
+                        navigate({ search: (prev: ShopSearch) => ({ ...prev, page: (prev.page ?? 1) + 1 }) })
                       }
                     >
                       <ArrowLeft className="h-4 w-4 rotate-180" />
