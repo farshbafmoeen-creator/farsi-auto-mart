@@ -3,6 +3,7 @@ import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { ShoppingCart, Check, ChevronLeft, ArrowLeft } from "lucide-react";
 import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
 import { ProductCard } from "@/components/shop/ProductCard";
 import { getProductBySlug, getRelatedProducts } from "@/lib/products.functions";
 import { useCart } from "@/lib/cart-context";
