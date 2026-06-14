@@ -93,8 +93,8 @@ function AdminOrdersPage() {
                 <ul className="mt-2 space-y-1 text-sm">
                   {o.order_items?.map((it: any) => (
                     <li key={it.id} className="flex justify-between border-t border-white/5 py-2">
-                      <span>{it.title_snapshot} × {toFa(it.qty)}</span>
-                      <span className="text-muted-foreground">{formatToman(it.unit_price * it.qty)}</span>
+                      <span>{it.product_snapshot?.title_fa ?? "—"} × {toFa(it.quantity)}</span>
+                      <span className="text-muted-foreground">{formatToman(it.unit_price * it.quantity)}</span>
                     </li>
                   ))}
                 </ul>
