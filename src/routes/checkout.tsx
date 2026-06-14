@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { ArrowLeft, CreditCard, MapPin, Truck, Check } from "lucide-react";
 import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
 import { useCart } from "@/lib/cart-context";
 import { formatToman } from "@/lib/fa";
 import { Button } from "@/components/ui/button";
@@ -207,6 +208,7 @@ function CheckoutPage() {
           </aside>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
