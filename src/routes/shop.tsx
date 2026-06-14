@@ -3,6 +3,7 @@ import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { useCallback, useState } from "react";
 import { Search, SlidersHorizontal, ArrowLeft, X } from "lucide-react";
 import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
 import { ProductCard } from "@/components/shop/ProductCard";
 import { getProducts, getCategories } from "@/lib/products.functions";
 import { toFa, formatToman } from "@/lib/fa";
@@ -226,6 +227,7 @@ function ShopPage() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
