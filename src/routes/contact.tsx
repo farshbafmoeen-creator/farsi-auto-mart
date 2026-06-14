@@ -1,10 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
+import { useServerFn } from "@tanstack/react-start";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { sendContactFormEmail } from "@/lib/email/send.functions";
+import { toast } from "sonner";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -20,7 +23,29 @@ export const Route = createFileRoute("/contact")({
 
 function ContactPage() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const mailto = `mailto:support@partbazaar.example?subject=${encodeURIComponent("پیام از " + (form.name || "وب‌سایت"))}&body=${encodeURIComponent(form.message + "\n\n— " + form.email)}`;
+  const [sending, setSending] = useState(false);
+  const sendFn = useServerFn(sendContactFormEmail);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (sending) return;
+    setSending(true);
+    try {
+      const res = await sendFn({ data: form });
+      if (res?.skipped) {
+        toast.success("پیام شما ثبت شد. به‌زودی پاسخ می‌دهیم.");
+      } else if (res?.ok) {
+        toast.success("پیام شما با موفقیت ارسال شد.");
+      } else {
+        toast.error("ارسال پیام با خطا مواجه شد.");
+      }
+      setForm({ name: "", email: "", message: "" });
+    } catch (err: any) {
+      toast.error(err?.message ?? "ارسال پیام با خطا مواجه شد.");
+    } finally {
+      setSending(false);
+    }
+  };
 
   return (
     <div className="min-h-screen">
@@ -63,13 +88,7 @@ function ContactPage() {
             </ul>
           </div>
 
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              window.location.href = mailto;
-            }}
-            className="rounded-2xl glass p-6"
-          >
+          <form onSubmit={handleSubmit} className="rounded-2xl glass p-6">
             <h2 className="text-lg font-bold">پیام به ما</h2>
             <div className="mt-4 space-y-3">
               <label className="block text-sm">
@@ -91,8 +110,11 @@ function ContactPage() {
                 />
               </label>
             </div>
-            <Button type="submit" className="mt-4 w-full">ارسال پیام</Button>
-            <p className="mt-2 text-xs text-muted-foreground">پیام شما در برنامه‌ی ایمیل پیش‌فرض باز می‌شود.</p>
+            <Button type="submit" className="mt-4 w-full gap-2" disabled={sending}>
+              {sending && <Loader2 className="h-4 w-4 animate-spin" />}
+              ارسال پیام
+            </Button>
+            <p className="mt-2 text-xs text-muted-foreground">پیام شما مستقیماً به تیم پشتیبانی ارسال می‌شود.</p>
           </form>
         </div>
       </main>

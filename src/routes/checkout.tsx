@@ -9,6 +9,7 @@ import { formatToman } from "@/lib/fa";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { createOrder } from "@/lib/orders.functions";
+import { sendOrderConfirmationEmail, sendAdminNewOrderEmail } from "@/lib/email/send.functions";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
@@ -26,6 +27,8 @@ function CheckoutPage() {
   const navigate = useNavigate();
   const { items, totalPrice, clearCart } = useCart();
   const createOrderFn = useServerFn(createOrder);
+  const sendConfirmFn = useServerFn(sendOrderConfirmationEmail);
+  const sendAdminFn = useServerFn(sendAdminNewOrderEmail);
   const [step, setStep] = useState<"address" | "payment" | "done">("address");
   const [orderId, setOrderId] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
@@ -90,6 +93,9 @@ function CheckoutPage() {
       setOrderId(res.orderId);
       clearCart();
       setStep("done");
+      // Fire-and-forget email notifications — don't block UX on failures.
+      void sendConfirmFn({ data: { orderId: res.orderId } }).catch((e) => console.warn("[email] confirm", e));
+      void sendAdminFn({ data: { orderId: res.orderId } }).catch((e) => console.warn("[email] admin", e));
     } catch (e: any) {
       toast.error(e?.message ?? "ثبت سفارش با خطا مواجه شد.");
     } finally {
