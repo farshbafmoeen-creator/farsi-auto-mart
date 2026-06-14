@@ -1,9 +1,10 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { adminListOrders, adminUpdateOrderStatus } from "@/lib/admin.functions";
 import { formatToman, toFa } from "@/lib/fa";
+import { ExternalLink } from "lucide-react";
 
 const STATUSES: { value: string; label: string; color: string }[] = [
   { value: "pending_payment", label: "در انتظار پرداخت", color: "bg-amber-500/15 text-amber-300" },
@@ -71,7 +72,14 @@ function AdminOrdersPage() {
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="font-mono text-sm font-bold">{o.order_number}</span>
+                    <Link
+                      to="/admin/orders/$id"
+                      params={{ id: o.id }}
+                      className="inline-flex items-center gap-1 font-mono text-sm font-bold hover:text-primary"
+                    >
+                      {o.order_number}
+                      <ExternalLink className="h-3 w-3 opacity-60" />
+                    </Link>
                     {statusBadge(o.status)}
                   </div>
                   <div className="mt-1 text-xs text-muted-foreground">
@@ -93,8 +101,8 @@ function AdminOrdersPage() {
                 <ul className="mt-2 space-y-1 text-sm">
                   {o.order_items?.map((it: any) => (
                     <li key={it.id} className="flex justify-between border-t border-white/5 py-2">
-                      <span>{it.title_snapshot} × {toFa(it.qty)}</span>
-                      <span className="text-muted-foreground">{formatToman(it.unit_price * it.qty)}</span>
+                      <span>{it.product_snapshot?.title_fa ?? "—"} × {toFa(it.quantity)}</span>
+                      <span className="text-muted-foreground">{formatToman(it.unit_price * it.quantity)}</span>
                     </li>
                   ))}
                 </ul>

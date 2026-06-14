@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { ArrowLeft, Shield, Truck, Headphones, Sparkles, ChevronDown, Search } from "lucide-react";
 import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
 import { ProductCard } from "@/components/shop/ProductCard";
 import { getProducts, getCategories, getCarMakes } from "@/lib/products.functions";
 import { toFa, formatToman } from "@/lib/fa";
@@ -196,35 +197,7 @@ function HomePage() {
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer id="about" className="mt-16 border-t border-white/10 glass">
-        <div className="container mx-auto grid grid-cols-1 gap-8 px-4 py-12 md:grid-cols-4">
-          <div>
-            <div className="flex items-center gap-2">
-              <div className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-primary to-[oklch(0.75_0.20_45)]">
-                <span className="text-lg font-black text-primary-foreground">پ</span>
-              </div>
-              <span className="text-lg font-extrabold">پارت‌بازار</span>
-            </div>
-            <p className="mt-4 text-sm text-muted-foreground">مرجع تخصصی قطعات یدکی خودرو در ایران.</p>
-          </div>
-          {[
-            { t: "فروشگاه", l: ["محصولات", "دسته‌بندی‌ها", "برندها", "پیشنهاد ویژه"] },
-            { t: "پشتیبانی", l: ["تماس با ما", "سؤالات متداول", "روش‌های ارسال", "بازگشت کالا"] },
-            { t: "پارت‌بازار", l: ["درباره ما", "وبلاگ", "همکاری با ما", "حریم خصوصی"] },
-          ].map((col) => (
-            <div key={col.t}>
-              <h4 className="mb-4 text-sm font-bold">{col.t}</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                {col.l.map((i) => <li key={i}><a className="hover:text-foreground">{i}</a></li>)}
-              </ul>
-            </div>
-          ))}
-        </div>
-        <div className="border-t border-white/10 py-6 text-center text-xs text-muted-foreground">
-          © {toFa(1404)} پارت‌بازار — تمامی حقوق محفوظ است.
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

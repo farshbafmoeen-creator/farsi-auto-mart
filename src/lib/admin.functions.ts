@@ -124,13 +124,28 @@ export const adminListOrders = createServerFn({ method: "GET" })
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     let q = supabaseAdmin
       .from("orders")
-      .select("id,order_number,status,total,subtotal,shipping_cost,shipping_address,created_at,user_id,order_items(id,qty,unit_price,title_snapshot)")
+      .select("id,order_number,status,total,subtotal,shipping_cost,shipping_address,created_at,user_id,order_items(id,quantity,unit_price,product_snapshot)")
       .order("created_at", { ascending: false })
       .limit(100);
     if (data?.status) q = q.eq("status", data.status);
     const { data: rows, error } = await q;
     if (error) throw new Error(error.message);
     return rows ?? [];
+  });
+
+export const adminGetOrder = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input: { id: string }) => z.object({ id: z.string().uuid() }).parse(input))
+  .handler(async ({ data, context }) => {
+    await assertAdmin(context.supabase, context.userId);
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data: row, error } = await supabaseAdmin
+      .from("orders")
+      .select("id,order_number,status,total,subtotal,shipping_cost,shipping_address,notes,payment_ref,created_at,updated_at,user_id,order_items(id,quantity,unit_price,product_snapshot,product_id)")
+      .eq("id", data.id)
+      .maybeSingle();
+    if (error) throw new Error(error.message);
+    return row;
   });
 
 export const adminUpdateOrderStatus = createServerFn({ method: "POST" })

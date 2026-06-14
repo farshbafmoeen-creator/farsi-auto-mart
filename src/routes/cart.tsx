@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Trash2, Minus, Plus, ShoppingBag, ArrowLeft } from "lucide-react";
 import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
 import { useCart } from "@/lib/cart-context";
 import { formatToman } from "@/lib/fa";
 import { Button } from "@/components/ui/button";
@@ -112,6 +113,7 @@ function CartPage() {
           </div>
         )}
       </div>
+      <Footer />
     </div>
   );
 }
