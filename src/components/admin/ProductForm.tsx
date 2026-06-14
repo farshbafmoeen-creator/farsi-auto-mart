@@ -41,7 +41,7 @@ export function ProductForm({
     is_featured: initial?.is_featured ?? false,
     is_active: initial?.is_active ?? true,
   });
-  const [newImage, setNewImage] = useState("");
+  const [loading2, _setLoading2] = useState(false); void _setLoading2; void loading2;
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
