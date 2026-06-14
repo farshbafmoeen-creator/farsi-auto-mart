@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { adminGetOrder, adminUpdateOrderStatus } from "@/lib/admin.functions";
+import { sendOrderStatusEmail } from "@/lib/email/send.functions";
 import { formatToman, toFa } from "@/lib/fa";
 import { ArrowRight } from "lucide-react";
 
@@ -22,6 +23,7 @@ function AdminOrderDetail() {
   const { id } = Route.useParams();
   const getFn = useServerFn(adminGetOrder);
   const updateFn = useServerFn(adminUpdateOrderStatus);
+  const sendStatusFn = useServerFn(sendOrderStatusEmail);
   const qc = useQueryClient();
 
   const { data: o, isLoading } = useQuery({
@@ -80,9 +82,11 @@ function AdminOrderDetail() {
             <select
               value={o.status}
               onChange={async (e) => {
-                await updateFn({ data: { id: o.id, status: e.target.value } });
+                const newStatus = e.target.value;
+                await updateFn({ data: { id: o.id, status: newStatus } });
                 qc.invalidateQueries({ queryKey: ["adminOrder", id] });
                 qc.invalidateQueries({ queryKey: ["adminOrders"] });
+                void sendStatusFn({ data: { orderId: o.id, newStatus } }).catch((err) => console.warn("[email] status", err));
               }}
               className="w-full rounded-lg border border-white/10 bg-background px-3 py-2 text-sm"
             >
