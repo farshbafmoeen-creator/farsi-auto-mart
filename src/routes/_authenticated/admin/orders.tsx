@@ -72,7 +72,14 @@ function AdminOrdersPage() {
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="font-mono text-sm font-bold">{o.order_number}</span>
+                    <Link
+                      to="/admin/orders/$id"
+                      params={{ id: o.id }}
+                      className="inline-flex items-center gap-1 font-mono text-sm font-bold hover:text-primary"
+                    >
+                      {o.order_number}
+                      <ExternalLink className="h-3 w-3 opacity-60" />
+                    </Link>
                     {statusBadge(o.status)}
                   </div>
                   <div className="mt-1 text-xs text-muted-foreground">
