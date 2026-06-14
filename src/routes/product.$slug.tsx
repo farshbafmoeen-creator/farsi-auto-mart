@@ -198,6 +198,7 @@ function ProductPage() {
           </section>
         )}
       </div>
+      <Footer />
     </div>
   );
 }
