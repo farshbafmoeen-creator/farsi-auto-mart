@@ -1,12 +1,16 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
-import { ArrowLeft, CreditCard, MapPin, Truck, Check } from "lucide-react";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import { ArrowLeft, CreditCard, MapPin, Truck, Check, Loader2 } from "lucide-react";
+import { useServerFn } from "@tanstack/react-start";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { useCart } from "@/lib/cart-context";
 import { formatToman } from "@/lib/fa";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { createOrder } from "@/lib/orders.functions";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 export const Route = createFileRoute("/checkout")({
   head: () => ({
@@ -19,8 +23,12 @@ export const Route = createFileRoute("/checkout")({
 });
 
 function CheckoutPage() {
+  const navigate = useNavigate();
   const { items, totalPrice, clearCart } = useCart();
+  const createOrderFn = useServerFn(createOrder);
   const [step, setStep] = useState<"address" | "payment" | "done">("address");
+  const [orderId, setOrderId] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
     recipient_name: "",
     phone: "",
@@ -29,6 +37,15 @@ function CheckoutPage() {
     address_line: "",
     postal_code: "",
   });
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => {
+      if (!data.session) {
+        toast.info("برای ثبت سفارش لطفاً وارد شوید.");
+        navigate({ to: "/auth", search: { redirect: "/checkout" } as never });
+      }
+    });
+  }, [navigate]);
 
   if (items.length === 0 && step !== "done") {
     return (
@@ -43,17 +60,41 @@ function CheckoutPage() {
             </Button>
           </Link>
         </div>
+        <Footer />
       </div>
     );
   }
 
-  const shipping = totalPrice > 5000000 ? 0 : 250000;
+  const shipping = totalPrice > 5_000_000 ? 0 : 250_000;
   const grandTotal = totalPrice + shipping;
 
-  const handlePayment = () => {
-    // Mock payment for now
-    clearCart();
-    setStep("done");
+  const addressValid =
+    form.recipient_name.trim().length > 1 &&
+    form.phone.trim().length >= 5 &&
+    form.province.trim().length > 0 &&
+    form.city.trim().length > 0 &&
+    form.address_line.trim().length > 3 &&
+    form.postal_code.trim().length >= 3;
+
+  const handlePayment = async () => {
+    if (submitting) return;
+    setSubmitting(true);
+    try {
+      const res = await createOrderFn({
+        data: {
+          items: items.map((i) => ({ product_id: i.productId, quantity: i.quantity })),
+          shipping_address: form,
+          shipping_cost: shipping,
+        },
+      });
+      setOrderId(res.orderId);
+      clearCart();
+      setStep("done");
+    } catch (e: any) {
+      toast.error(e?.message ?? "ثبت سفارش با خطا مواجه شد.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   if (step === "done") {
@@ -66,15 +107,26 @@ function CheckoutPage() {
           </div>
           <h1 className="mt-6 text-2xl font-black">سفارش ثبت شد!</h1>
           <p className="mt-2 max-w-md text-sm text-muted-foreground">
-            این یک پرداخت آزمایشی بود. اتصال به درگاه زرین‌پال در گام بعدی انجام می‌شود.
+            سفارش شما با وضعیت «در انتظار پرداخت» ثبت شد. اتصال به درگاه زرین‌پال در گام بعدی فعال می‌شود؛ فعلاً پرداخت آزمایشی است.
           </p>
-          <Link to="/shop">
-            <Button className="mt-6 gap-2">
-              <ArrowLeft className="h-4 w-4" />
-              ادامه خرید
-            </Button>
-          </Link>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+            {orderId && (
+              <Link to="/orders/$id" params={{ id: orderId }}>
+                <Button className="gap-2">مشاهده سفارش</Button>
+              </Link>
+            )}
+            <Link to="/orders">
+              <Button variant="outline">سفارش‌های من</Button>
+            </Link>
+            <Link to="/shop">
+              <Button variant="ghost" className="gap-2">
+                <ArrowLeft className="h-4 w-4" />
+                ادامه خرید
+              </Button>
+            </Link>
+          </div>
         </div>
+        <Footer />
       </div>
     );
   }
@@ -98,47 +150,14 @@ function CheckoutPage() {
                   <h2 className="text-lg font-bold">آدرس تحویل</h2>
                 </div>
                 <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  <Input
-                    placeholder="نام و نام خانوادگی گیرنده"
-                    value={form.recipient_name}
-                    onChange={(e) => setForm({ ...form, recipient_name: e.target.value })}
-                    className="glass bg-white/5"
-                  />
-                  <Input
-                    placeholder="شماره تماس"
-                    value={form.phone}
-                    onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                    className="glass bg-white/5"
-                  />
-                  <Input
-                    placeholder="استان"
-                    value={form.province}
-                    onChange={(e) => setForm({ ...form, province: e.target.value })}
-                    className="glass bg-white/5"
-                  />
-                  <Input
-                    placeholder="شهر"
-                    value={form.city}
-                    onChange={(e) => setForm({ ...form, city: e.target.value })}
-                    className="glass bg-white/5"
-                  />
-                  <Input
-                    placeholder="کد پستی"
-                    value={form.postal_code}
-                    onChange={(e) => setForm({ ...form, postal_code: e.target.value })}
-                    className="glass bg-white/5"
-                  />
-                  <Input
-                    placeholder="آدرس کامل"
-                    value={form.address_line}
-                    onChange={(e) => setForm({ ...form, address_line: e.target.value })}
-                    className="glass bg-white/5 sm:col-span-2"
-                  />
+                  <Input placeholder="نام و نام خانوادگی گیرنده" value={form.recipient_name} onChange={(e) => setForm({ ...form, recipient_name: e.target.value })} className="glass bg-white/5" />
+                  <Input placeholder="شماره تماس" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className="glass bg-white/5" />
+                  <Input placeholder="استان" value={form.province} onChange={(e) => setForm({ ...form, province: e.target.value })} className="glass bg-white/5" />
+                  <Input placeholder="شهر" value={form.city} onChange={(e) => setForm({ ...form, city: e.target.value })} className="glass bg-white/5" />
+                  <Input placeholder="کد پستی" value={form.postal_code} onChange={(e) => setForm({ ...form, postal_code: e.target.value })} className="glass bg-white/5" />
+                  <Input placeholder="آدرس کامل" value={form.address_line} onChange={(e) => setForm({ ...form, address_line: e.target.value })} className="glass bg-white/5 sm:col-span-2" />
                 </div>
-                <Button
-                  className="mt-6 w-full gap-2 bg-gradient-to-r from-primary to-[oklch(0.75_0.20_45)] text-primary-foreground glow-primary"
-                  onClick={() => setStep("payment")}
-                >
+                <Button disabled={!addressValid} className="mt-6 w-full gap-2 bg-gradient-to-r from-primary to-[oklch(0.75_0.20_45)] text-primary-foreground glow-primary" onClick={() => setStep("payment")}>
                   ادامه به پرداخت
                 </Button>
               </div>
@@ -152,23 +171,16 @@ function CheckoutPage() {
                 </div>
                 <div className="mt-6 rounded-2xl border border-dashed border-white/20 bg-white/5 p-8 text-center">
                   <Truck className="mx-auto h-10 w-10 text-muted-foreground" />
-                  <p className="mt-4 text-sm text-muted-foreground">
-                    اتصال به درگاه زرین‌پال در گام بعدی فعال می‌شود.
-                  </p>
-                  <p className="mt-2 text-xs text-muted-foreground">
-                    فعلاً پرداخت آزمایشی است و هیچ وجهی کسر نمی‌شود.
-                  </p>
+                  <p className="mt-4 text-sm text-muted-foreground">اتصال به درگاه زرین‌پال در گام بعدی فعال می‌شود.</p>
+                  <p className="mt-2 text-xs text-muted-foreground">با تأیید، سفارش با وضعیت «در انتظار پرداخت» در سامانه ثبت می‌شود.</p>
                 </div>
                 <div className="mt-6 flex gap-3">
-                  <Button variant="outline" onClick={() => setStep("address")} className="flex-1">
+                  <Button variant="outline" onClick={() => setStep("address")} className="flex-1" disabled={submitting}>
                     بازگشت
                   </Button>
-                  <Button
-                    className="flex-1 gap-2 bg-gradient-to-r from-primary to-[oklch(0.75_0.20_45)] text-primary-foreground glow-primary"
-                    onClick={handlePayment}
-                  >
-                    <CreditCard className="h-4 w-4" />
-                    پرداخت آزمایشی
+                  <Button className="flex-1 gap-2 bg-gradient-to-r from-primary to-[oklch(0.75_0.20_45)] text-primary-foreground glow-primary" onClick={handlePayment} disabled={submitting}>
+                    {submitting ? <Loader2 className="h-4 w-4 animate-spin" /> : <CreditCard className="h-4 w-4" />}
+                    ثبت سفارش (آزمایشی)
                   </Button>
                 </div>
               </div>
@@ -184,9 +196,7 @@ function CheckoutPage() {
                   <img src={item.image} alt="" className="h-12 w-12 rounded-lg object-cover" />
                   <div className="min-w-0 flex-1">
                     <p className="truncate text-xs font-bold">{item.title_fa}</p>
-                    <p className="text-[10px] text-muted-foreground">
-                      {formatToman(item.quantity)} × {formatToman(item.price)}
-                    </p>
+                    <p className="text-[10px] text-muted-foreground">{formatToman(item.quantity)} × {formatToman(item.price)}</p>
                   </div>
                 </div>
               ))}
