@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { X, Plus } from "lucide-react";
+import { ImageUpload } from "@/components/admin/ImageUpload";
 
 export type ProductFormValues = {
   title_fa: string;
@@ -124,35 +124,7 @@ export function ProductForm({
 
       <div className="rounded-2xl border border-white/10 bg-card/40 p-5">
         <h2 className="mb-4 font-bold">تصاویر</h2>
-        <div className="mb-3 flex gap-2">
-          <Input value={newImage} onChange={(e) => setNewImage(e.target.value)} placeholder="آدرس URL تصویر…" dir="ltr" />
-          <Button
-            type="button"
-            variant="secondary"
-            onClick={() => {
-              if (newImage.trim()) {
-                set("images", [...v.images, newImage.trim()]);
-                setNewImage("");
-              }
-            }}
-          >
-            <Plus className="h-4 w-4" />
-          </Button>
-        </div>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-          {v.images.map((img, i) => (
-            <div key={i} className="relative overflow-hidden rounded-lg border border-white/10 bg-white/5">
-              <img src={img} alt="" className="aspect-square w-full object-cover" />
-              <button
-                type="button"
-                onClick={() => set("images", v.images.filter((_, idx) => idx !== i))}
-                className="absolute top-1 right-1 grid h-7 w-7 place-items-center rounded-full bg-red-500/80 text-white"
-              >
-                <X className="h-3 w-3" />
-              </button>
-            </div>
-          ))}
-        </div>
+        <ImageUpload value={v.images} onChange={(imgs) => set("images", imgs)} />
       </div>
 
       <div className="rounded-2xl border border-white/10 bg-card/40 p-5">
