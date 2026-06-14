@@ -98,11 +98,11 @@ function AdminOrderDetail() {
           <div className="rounded-2xl border border-white/10 bg-card/40 p-5">
             <h2 className="mb-3 font-bold">گیرنده</h2>
             <dl className="space-y-1.5 text-sm">
-              <Row label="نام" v={addr.full_name ?? "—"} />
+              <Row label="نام" v={addr.recipient_name ?? addr.full_name ?? "—"} />
               <Row label="تلفن" v={addr.phone ?? "—"} />
               <Row label="استان" v={addr.province ?? "—"} />
               <Row label="شهر" v={addr.city ?? "—"} />
-              <Row label="آدرس" v={addr.line1 ?? "—"} />
+              <Row label="آدرس" v={addr.address_line ?? addr.line1 ?? "—"} />
               <Row label="کدپستی" v={addr.postal_code ?? "—"} />
             </dl>
           </div>

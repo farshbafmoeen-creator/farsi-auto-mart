@@ -5,7 +5,7 @@ import { Header } from "@/components/layout/Header";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { checkIsAdmin } from "@/lib/admin.functions";
-import { LogOut, Shield, Package } from "lucide-react";
+import { LogOut, Shield, Package, ShoppingBag } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/account")({
   head: () => ({ meta: [{ title: "حساب کاربری | پارت‌بازار" }] }),
@@ -32,8 +32,11 @@ function AccountPage() {
           <p className="text-sm text-muted-foreground">ایمیل</p>
           <p className="mb-6 text-lg font-medium">{user.email}</p>
           <div className="flex flex-wrap gap-3">
+            <Button asChild>
+              <Link to="/orders"><ShoppingBag className="ms-2 h-4 w-4" /> سفارش‌های من</Link>
+            </Button>
             {data?.isAdmin && (
-              <Button asChild>
+              <Button variant="outline" asChild>
                 <Link to="/admin"><Shield className="ms-2 h-4 w-4" /> پنل ادمین</Link>
               </Button>
             )}
