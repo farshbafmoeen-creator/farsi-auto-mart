@@ -11,6 +11,9 @@ import { Dialog, DialogContent, DialogTrigger, DialogTitle, DialogHeader } from 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import logoFull from "@/assets/logo-full.png.asset.json";
+
+
 
 export function Header() {
   const { totalItems } = useCart();
