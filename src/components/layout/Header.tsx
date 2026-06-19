@@ -46,12 +46,10 @@ export function Header() {
     <header className="sticky top-0 z-50 glass border-b border-white/10">
       <div className="container mx-auto flex h-16 items-center justify-between gap-4 px-4">
         <div className="flex items-center gap-8">
-          <Link to="/" className="flex items-center gap-2">
-            <div className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-primary to-[oklch(0.75_0.20_45)] glow-primary">
-              <span className="text-lg font-black text-primary-foreground">پ</span>
-            </div>
-            <span className="text-lg font-extrabold tracking-tight">پارت‌بازار</span>
+          <Link to="/" className="flex items-center" aria-label="پارت‌بازار">
+            <img src={logoFull.url} alt="پارت‌بازار" className="h-10 w-auto" />
           </Link>
+
 
           <nav className="hidden items-center gap-1 text-sm md:flex">
             <Link to="/" className="rounded-lg px-3 py-2 text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground">
