@@ -1,5 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { toFa } from "@/lib/fa";
+import logoFull from "@/assets/logo-full.png.asset.json";
+
 
 const COLS: { t: string; l: { label: string; to: string }[] }[] = [
   {
@@ -36,14 +38,12 @@ export function Footer() {
     <footer className="mt-16 border-t border-white/10 glass">
       <div className="container mx-auto grid grid-cols-1 gap-8 px-4 py-12 md:grid-cols-4">
         <div>
-          <div className="flex items-center gap-2">
-            <div className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-primary to-[oklch(0.75_0.20_45)]">
-              <span className="text-lg font-black text-primary-foreground">پ</span>
-            </div>
-            <span className="text-lg font-extrabold">پارت‌بازار</span>
+          <div className="flex items-center">
+            <img src={logoFull.url} alt="پارت‌بازار" className="h-12 w-auto" />
           </div>
           <p className="mt-4 text-sm text-muted-foreground">مرجع تخصصی قطعات یدکی خودرو در ایران.</p>
         </div>
+
         {COLS.map((col) => (
           <div key={col.t}>
             <h4 className="mb-4 text-sm font-bold">{col.t}</h4>

@@ -12,6 +12,9 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { CartProvider } from "@/lib/cart-context";
+import faviconAsset from "@/assets/favicon.png.asset.json";
+import logoFullAsset from "@/assets/logo-full.png.asset.json";
+
 
 function NotFoundComponent() {
   return (
@@ -55,15 +58,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:title", content: "پارت‌بازار | فروشگاه آنلاین قطعات خودرو" },
       { property: "og:description", content: "قطعات اصلی، قیمت منصفانه، ارسال سریع." },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: logoFullAsset.url },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: logoFullAsset.url },
     ],
     links: [
+      { rel: "icon", type: "image/png", href: faviconAsset.url },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" },
       { rel: "stylesheet", href: appCss },
     ],
   }),
+
   shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
