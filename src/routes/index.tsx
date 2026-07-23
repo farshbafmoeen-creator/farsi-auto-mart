@@ -79,7 +79,7 @@ function HomePage() {
               <div className="relative">
                 <input placeholder="نام قطعه، برند یا کد فنی" className="w-full rounded-2xl bg-accent/50 px-4 py-4 text-right text-sm outline-none placeholder:text-muted-foreground focus:bg-accent" />
               </div>
-              <button className="flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-primary to-[oklch(0.75_0.20_45)] px-6 py-4 text-sm font-bold text-primary-foreground glow-primary transition hover:scale-105">
+              <button className="flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-primary to-[oklch(0.55_0.17_258)] px-6 py-4 text-sm font-bold text-primary-foreground glow-primary transition hover:scale-105">
                 <Search className="h-4 w-4" />
                 جستجو
               </button>
