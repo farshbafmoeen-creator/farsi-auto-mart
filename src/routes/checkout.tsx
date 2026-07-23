@@ -156,12 +156,12 @@ function CheckoutPage() {
                   <h2 className="text-lg font-bold">آدرس تحویل</h2>
                 </div>
                 <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  <Input placeholder="نام و نام خانوادگی گیرنده" value={form.recipient_name} onChange={(e) => setForm({ ...form, recipient_name: e.target.value })} className="glass bg-white/5" />
-                  <Input placeholder="شماره تماس" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className="glass bg-white/5" />
-                  <Input placeholder="استان" value={form.province} onChange={(e) => setForm({ ...form, province: e.target.value })} className="glass bg-white/5" />
-                  <Input placeholder="شهر" value={form.city} onChange={(e) => setForm({ ...form, city: e.target.value })} className="glass bg-white/5" />
-                  <Input placeholder="کد پستی" value={form.postal_code} onChange={(e) => setForm({ ...form, postal_code: e.target.value })} className="glass bg-white/5" />
-                  <Input placeholder="آدرس کامل" value={form.address_line} onChange={(e) => setForm({ ...form, address_line: e.target.value })} className="glass bg-white/5 sm:col-span-2" />
+                  <Input placeholder="نام و نام خانوادگی گیرنده" value={form.recipient_name} onChange={(e) => setForm({ ...form, recipient_name: e.target.value })} className="glass bg-accent/50" />
+                  <Input placeholder="شماره تماس" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className="glass bg-accent/50" />
+                  <Input placeholder="استان" value={form.province} onChange={(e) => setForm({ ...form, province: e.target.value })} className="glass bg-accent/50" />
+                  <Input placeholder="شهر" value={form.city} onChange={(e) => setForm({ ...form, city: e.target.value })} className="glass bg-accent/50" />
+                  <Input placeholder="کد پستی" value={form.postal_code} onChange={(e) => setForm({ ...form, postal_code: e.target.value })} className="glass bg-accent/50" />
+                  <Input placeholder="آدرس کامل" value={form.address_line} onChange={(e) => setForm({ ...form, address_line: e.target.value })} className="glass bg-accent/50 sm:col-span-2" />
                 </div>
                 <Button disabled={!addressValid} className="mt-6 w-full gap-2 bg-gradient-to-r from-primary to-[oklch(0.75_0.20_45)] text-primary-foreground glow-primary" onClick={() => setStep("payment")}>
                   ادامه به پرداخت
@@ -175,7 +175,7 @@ function CheckoutPage() {
                   <CreditCard className="h-5 w-5 text-primary" />
                   <h2 className="text-lg font-bold">پرداخت</h2>
                 </div>
-                <div className="mt-6 rounded-2xl border border-dashed border-white/20 bg-white/5 p-8 text-center">
+                <div className="mt-6 rounded-2xl border border-dashed border-border bg-accent/50 p-8 text-center">
                   <Truck className="mx-auto h-10 w-10 text-muted-foreground" />
                   <p className="mt-4 text-sm text-muted-foreground">اتصال به درگاه زرین‌پال در گام بعدی فعال می‌شود.</p>
                   <p className="mt-2 text-xs text-muted-foreground">با تأیید، سفارش با وضعیت «در انتظار پرداخت» در سامانه ثبت می‌شود.</p>
@@ -207,7 +207,7 @@ function CheckoutPage() {
                 </div>
               ))}
             </div>
-            <div className="mt-6 space-y-3 border-t border-white/10 pt-4 text-sm">
+            <div className="mt-6 space-y-3 border-t border-border pt-4 text-sm">
               <div className="flex justify-between text-muted-foreground">
                 <span>جمع کالاها</span>
                 <span>{formatToman(totalPrice)} تومان</span>

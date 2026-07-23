@@ -49,7 +49,7 @@ function AdminOrderDetail() {
       </div>
 
       <div className="grid gap-4 lg:grid-cols-[1.5fr_1fr]">
-        <div className="rounded-2xl border border-white/10 bg-card/40 p-5">
+        <div className="rounded-2xl border border-border bg-card/40 p-5">
           <h2 className="mb-3 font-bold">اقلام سفارش</h2>
           <ul className="divide-y divide-white/10 text-sm">
             {o.order_items?.map((it: any) => (
@@ -69,7 +69,7 @@ function AdminOrderDetail() {
               </li>
             ))}
           </ul>
-          <div className="mt-4 space-y-1 border-t border-white/10 pt-4 text-sm">
+          <div className="mt-4 space-y-1 border-t border-border pt-4 text-sm">
             <Row label="جمع" v={formatToman(o.subtotal)} />
             <Row label="هزینه ارسال" v={formatToman(o.shipping_cost)} />
             <Row label="جمع کل" v={formatToman(o.total)} bold />
@@ -77,7 +77,7 @@ function AdminOrderDetail() {
         </div>
 
         <div className="space-y-4">
-          <div className="rounded-2xl border border-white/10 bg-card/40 p-5">
+          <div className="rounded-2xl border border-border bg-card/40 p-5">
             <h2 className="mb-3 font-bold">وضعیت</h2>
             <select
               value={o.status}
@@ -88,7 +88,7 @@ function AdminOrderDetail() {
                 qc.invalidateQueries({ queryKey: ["adminOrders"] });
                 void sendStatusFn({ data: { orderId: o.id, newStatus } }).catch((err) => console.warn("[email] status", err));
               }}
-              className="w-full rounded-lg border border-white/10 bg-background px-3 py-2 text-sm"
+              className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm"
             >
               {STATUSES.map((s) => (
                 <option key={s.value} value={s.value}>{s.label}</option>
@@ -99,7 +99,7 @@ function AdminOrderDetail() {
             </p>
           </div>
 
-          <div className="rounded-2xl border border-white/10 bg-card/40 p-5">
+          <div className="rounded-2xl border border-border bg-card/40 p-5">
             <h2 className="mb-3 font-bold">گیرنده</h2>
             <dl className="space-y-1.5 text-sm">
               <Row label="نام" v={addr.recipient_name ?? addr.full_name ?? "—"} />
@@ -112,7 +112,7 @@ function AdminOrderDetail() {
           </div>
 
           {o.notes && (
-            <div className="rounded-2xl border border-white/10 bg-card/40 p-5">
+            <div className="rounded-2xl border border-border bg-card/40 p-5">
               <h2 className="mb-2 font-bold">یادداشت</h2>
               <p className="text-sm text-muted-foreground">{o.notes}</p>
             </div>

@@ -43,7 +43,7 @@ export function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 glass border-b border-white/10">
+    <header className="sticky top-0 z-50 glass border-b border-border">
       <div className="container mx-auto flex h-16 items-center justify-between gap-4 px-4">
         <div className="flex items-center gap-8">
           <Link to="/" className="flex items-center" aria-label="پارت‌بازار">
@@ -52,10 +52,10 @@ export function Header() {
 
 
           <nav className="hidden items-center gap-1 text-sm md:flex">
-            <Link to="/" className="rounded-lg px-3 py-2 text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground">
+            <Link to="/" className="rounded-lg px-3 py-2 text-muted-foreground transition-colors hover:bg-accent/50 hover:text-foreground">
               خانه
             </Link>
-            <Link to="/shop" className="rounded-lg px-3 py-2 text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground">
+            <Link to="/shop" className="rounded-lg px-3 py-2 text-muted-foreground transition-colors hover:bg-accent/50 hover:text-foreground">
               فروشگاه
             </Link>
 
@@ -64,14 +64,14 @@ export function Header() {
               <button
                 onMouseEnter={() => setMegaOpen(true)}
                 onClick={() => setMegaOpen((s) => !s)}
-                className="flex items-center gap-1 rounded-lg px-3 py-2 text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground"
+                className="flex items-center gap-1 rounded-lg px-3 py-2 text-muted-foreground transition-colors hover:bg-accent/50 hover:text-foreground"
               >
                 دسته‌بندی‌ها
                 <ChevronDown className={`h-3.5 w-3.5 transition-transform ${megaOpen ? "rotate-180" : ""}`} />
               </button>
               {megaOpen && (
                 <div className="absolute right-0 top-full pt-2">
-                  <div className="w-[640px] rounded-2xl border border-white/10 bg-card/95 p-6 shadow-2xl backdrop-blur-xl">
+                  <div className="w-[640px] rounded-2xl border border-border bg-card/95 p-6 shadow-2xl backdrop-blur-xl">
                     <div className="grid grid-cols-2 gap-6">
                       <div>
                         <h4 className="mb-3 text-xs font-bold uppercase text-muted-foreground">دسته‌ی قطعه</h4>
@@ -82,7 +82,7 @@ export function Header() {
                                 to="/shop"
                                 search={{ category: c.slug, sort: "newest", page: 1 }}
                                 onClick={() => setMegaOpen(false)}
-                                className="flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm text-muted-foreground transition hover:bg-white/5 hover:text-foreground"
+                                className="flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm text-muted-foreground transition hover:bg-accent/50 hover:text-foreground"
                               >
                                 <span>{c.icon ?? "🔩"}</span>
                                 {c.name_fa}
@@ -103,7 +103,7 @@ export function Header() {
                                 to="/shop"
                                 search={{ q: m.name_fa, sort: "newest", page: 1 }}
                                 onClick={() => setMegaOpen(false)}
-                                className="block rounded-lg px-2 py-1.5 text-sm text-muted-foreground transition hover:bg-white/5 hover:text-foreground"
+                                className="block rounded-lg px-2 py-1.5 text-sm text-muted-foreground transition hover:bg-accent/50 hover:text-foreground"
                               >
                                 {m.name_fa}
                               </Link>
@@ -115,7 +115,7 @@ export function Header() {
                         </ul>
                       </div>
                     </div>
-                    <div className="mt-5 border-t border-white/10 pt-4">
+                    <div className="mt-5 border-t border-border pt-4">
                       <Link
                         to="/shop"
                         onClick={() => setMegaOpen(false)}
@@ -129,10 +129,10 @@ export function Header() {
               )}
             </div>
 
-            <Link to="/about" className="rounded-lg px-3 py-2 text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground">
+            <Link to="/about" className="rounded-lg px-3 py-2 text-muted-foreground transition-colors hover:bg-accent/50 hover:text-foreground">
               درباره ما
             </Link>
-            <Link to="/contact" className="rounded-lg px-3 py-2 text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground">
+            <Link to="/contact" className="rounded-lg px-3 py-2 text-muted-foreground transition-colors hover:bg-accent/50 hover:text-foreground">
               تماس
             </Link>
           </nav>
@@ -142,7 +142,7 @@ export function Header() {
           {/* Search dialog */}
           <Dialog open={searchOpen} onOpenChange={setSearchOpen}>
             <DialogTrigger asChild>
-              <button className="grid h-10 w-10 place-items-center rounded-xl glass transition hover:bg-white/10" aria-label="جستجو">
+              <button className="grid h-10 w-10 place-items-center rounded-xl glass transition hover:bg-accent" aria-label="جستجو">
                 <Search className="h-4 w-4" />
               </button>
             </DialogTrigger>
@@ -171,10 +171,10 @@ export function Header() {
             </DialogContent>
           </Dialog>
 
-          <Link to="/account" className="hidden h-10 w-10 place-items-center rounded-xl glass transition hover:bg-white/10 md:grid" aria-label="حساب کاربری">
+          <Link to="/account" className="hidden h-10 w-10 place-items-center rounded-xl glass transition hover:bg-accent md:grid" aria-label="حساب کاربری">
             <User className="h-4 w-4" />
           </Link>
-          <Link to="/cart" className="relative grid h-10 w-10 place-items-center rounded-xl glass transition hover:bg-white/10" aria-label="سبد خرید">
+          <Link to="/cart" className="relative grid h-10 w-10 place-items-center rounded-xl glass transition hover:bg-accent" aria-label="سبد خرید">
             <ShoppingCart className="h-4 w-4" />
             {totalItems > 0 && (
               <span className="absolute -top-1 -left-1 grid h-5 w-5 place-items-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
@@ -199,7 +199,7 @@ export function Header() {
                 <MobileLink to="/shop" onClick={() => setMobileOpen(false)}>فروشگاه</MobileLink>
                 <Accordion type="single" collapsible>
                   <AccordionItem value="cats" className="border-b-0">
-                    <AccordionTrigger className="rounded-lg px-3 py-2 hover:bg-white/5 hover:no-underline">دسته‌ها</AccordionTrigger>
+                    <AccordionTrigger className="rounded-lg px-3 py-2 hover:bg-accent/50 hover:no-underline">دسته‌ها</AccordionTrigger>
                     <AccordionContent className="pb-0">
                       <ul className="space-y-0.5 ps-2">
                         {(categories ?? []).map((c) => (
@@ -208,7 +208,7 @@ export function Header() {
                               to="/shop"
                               search={{ category: c.slug, sort: "newest", page: 1 }}
                               onClick={() => setMobileOpen(false)}
-                              className="block rounded-lg px-3 py-1.5 text-sm text-muted-foreground hover:bg-white/5 hover:text-foreground"
+                              className="block rounded-lg px-3 py-1.5 text-sm text-muted-foreground hover:bg-accent/50 hover:text-foreground"
                             >
                               {c.icon ?? "🔩"} {c.name_fa}
                             </Link>
@@ -218,7 +218,7 @@ export function Header() {
                     </AccordionContent>
                   </AccordionItem>
                   <AccordionItem value="makes" className="border-b-0">
-                    <AccordionTrigger className="rounded-lg px-3 py-2 hover:bg-white/5 hover:no-underline">برندهای خودرو</AccordionTrigger>
+                    <AccordionTrigger className="rounded-lg px-3 py-2 hover:bg-accent/50 hover:no-underline">برندهای خودرو</AccordionTrigger>
                     <AccordionContent className="pb-0">
                       <ul className="grid grid-cols-2 gap-0.5 ps-2">
                         {(makes ?? []).map((m) => (
@@ -227,7 +227,7 @@ export function Header() {
                               to="/shop"
                               search={{ q: m.name_fa, sort: "newest", page: 1 }}
                               onClick={() => setMobileOpen(false)}
-                              className="block rounded-lg px-3 py-1.5 text-sm text-muted-foreground hover:bg-white/5 hover:text-foreground"
+                              className="block rounded-lg px-3 py-1.5 text-sm text-muted-foreground hover:bg-accent/50 hover:text-foreground"
                             >
                               {m.name_fa}
                             </Link>
@@ -241,7 +241,7 @@ export function Header() {
                 <MobileLink to="/contact" onClick={() => setMobileOpen(false)}>تماس با ما</MobileLink>
                 <MobileLink to="/faq" onClick={() => setMobileOpen(false)}>سؤالات متداول</MobileLink>
                 <MobileLink to="/shipping" onClick={() => setMobileOpen(false)}>روش‌های ارسال</MobileLink>
-                <div className="mt-2 border-t border-white/10 pt-2">
+                <div className="mt-2 border-t border-border pt-2">
                   <MobileLink to="/account" onClick={() => setMobileOpen(false)}>حساب کاربری</MobileLink>
                   <MobileLink to="/cart" onClick={() => setMobileOpen(false)}>سبد خرید</MobileLink>
                 </div>
@@ -259,7 +259,7 @@ function MobileLink({ to, onClick, children }: { to: string; onClick: () => void
     <Link
       to={to}
       onClick={onClick}
-      className="rounded-lg px-3 py-2 text-muted-foreground transition hover:bg-white/5 hover:text-foreground"
+      className="rounded-lg px-3 py-2 text-muted-foreground transition hover:bg-accent/50 hover:text-foreground"
     >
       {children}
     </Link>

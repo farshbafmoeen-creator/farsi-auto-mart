@@ -54,7 +54,7 @@ function OrderDetail() {
             </div>
 
             <div className="grid gap-4 lg:grid-cols-[1.5fr_1fr]">
-              <div className="rounded-2xl border border-white/10 bg-card/40 p-5">
+              <div className="rounded-2xl border border-border bg-card/40 p-5">
                 <h2 className="mb-3 font-bold">اقلام</h2>
                 <ul className="divide-y divide-white/10 text-sm">
                   {(o.order_items ?? []).map((it: any) => (
@@ -74,14 +74,14 @@ function OrderDetail() {
                     </li>
                   ))}
                 </ul>
-                <div className="mt-4 space-y-1 border-t border-white/10 pt-4 text-sm">
+                <div className="mt-4 space-y-1 border-t border-border pt-4 text-sm">
                   <Row label="جمع" v={`${formatToman(o.subtotal)} تومان`} />
                   <Row label="هزینه ارسال" v={o.shipping_cost ? `${formatToman(o.shipping_cost)} تومان` : "رایگان"} />
                   <Row label="جمع کل" v={`${formatToman(o.total)} تومان`} bold />
                 </div>
               </div>
 
-              <div className="rounded-2xl border border-white/10 bg-card/40 p-5">
+              <div className="rounded-2xl border border-border bg-card/40 p-5">
                 <h2 className="mb-3 font-bold">آدرس تحویل</h2>
                 <dl className="space-y-1.5 text-sm">
                   <Row label="نام" v={(o.shipping_address as any)?.recipient_name ?? "—"} />

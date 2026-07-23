@@ -36,7 +36,7 @@ function AdminOrdersPage() {
 
   const statusBadge = (status: string) => {
     const s = STATUSES.find((x) => x.value === status);
-    return <span className={`rounded-full px-2 py-0.5 text-xs ${s?.color ?? "bg-white/5 text-muted-foreground"}`}>{s?.label ?? status}</span>;
+    return <span className={`rounded-full px-2 py-0.5 text-xs ${s?.color ?? "bg-accent/50 text-muted-foreground"}`}>{s?.label ?? status}</span>;
   };
 
   return (
@@ -46,7 +46,7 @@ function AdminOrdersPage() {
       <div className="mb-4 flex flex-wrap items-center gap-2">
         <button
           onClick={() => setFilter("")}
-          className={`rounded-full px-3 py-1 text-xs transition ${filter === "" ? "bg-primary text-primary-foreground" : "border border-white/10 hover:bg-white/5"}`}
+          className={`rounded-full px-3 py-1 text-xs transition ${filter === "" ? "bg-primary text-primary-foreground" : "border border-border hover:bg-accent/50"}`}
         >
           همه
         </button>
@@ -54,7 +54,7 @@ function AdminOrdersPage() {
           <button
             key={s.value}
             onClick={() => setFilter(s.value)}
-            className={`rounded-full px-3 py-1 text-xs transition ${filter === s.value ? "bg-primary text-primary-foreground" : "border border-white/10 hover:bg-white/5"}`}
+            className={`rounded-full px-3 py-1 text-xs transition ${filter === s.value ? "bg-primary text-primary-foreground" : "border border-border hover:bg-accent/50"}`}
           >
             {s.label}
           </button>
@@ -64,11 +64,11 @@ function AdminOrdersPage() {
       {isLoading ? (
         <div className="py-10 text-center text-muted-foreground">در حال بارگذاری…</div>
       ) : (data?.length ?? 0) === 0 ? (
-        <div className="rounded-2xl border border-white/10 bg-card/40 py-10 text-center text-muted-foreground">سفارشی پیدا نشد.</div>
+        <div className="rounded-2xl border border-border bg-card/40 py-10 text-center text-muted-foreground">سفارشی پیدا نشد.</div>
       ) : (
         <div className="space-y-3">
           {data?.map((o: any) => (
-            <div key={o.id} className="rounded-2xl border border-white/10 bg-card/40 p-5">
+            <div key={o.id} className="rounded-2xl border border-border bg-card/40 p-5">
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div>
                   <div className="flex items-center gap-2">
@@ -100,7 +100,7 @@ function AdminOrdersPage() {
                 <summary className="cursor-pointer text-sm text-muted-foreground hover:text-foreground">اقلام سفارش</summary>
                 <ul className="mt-2 space-y-1 text-sm">
                   {o.order_items?.map((it: any) => (
-                    <li key={it.id} className="flex justify-between border-t border-white/5 py-2">
+                    <li key={it.id} className="flex justify-between border-t border-border/50 py-2">
                       <span>{it.product_snapshot?.title_fa ?? "—"} × {toFa(it.quantity)}</span>
                       <span className="text-muted-foreground">{formatToman(it.unit_price * it.quantity)}</span>
                     </li>
@@ -108,12 +108,12 @@ function AdminOrdersPage() {
                 </ul>
               </details>
 
-              <div className="mt-4 flex flex-wrap items-center gap-2 border-t border-white/10 pt-4">
+              <div className="mt-4 flex flex-wrap items-center gap-2 border-t border-border pt-4">
                 <span className="text-xs text-muted-foreground">تغییر وضعیت:</span>
                 <select
                   value={o.status}
                   onChange={(e) => changeStatus(o.id, e.target.value)}
-                  className="rounded-lg border border-white/10 bg-background px-3 py-1.5 text-sm"
+                  className="rounded-lg border border-border bg-background px-3 py-1.5 text-sm"
                 >
                   {STATUSES.map((s) => (
                     <option key={s.value} value={s.value}>{s.label}</option>
