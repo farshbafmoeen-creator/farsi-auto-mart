@@ -41,7 +41,7 @@ function AdminLayout() {
       <div className="container mx-auto px-4 py-8">
         <div className="grid gap-6 lg:grid-cols-[220px_1fr]">
           <aside className="lg:sticky lg:top-24 lg:self-start">
-            <div className="rounded-2xl border border-white/10 bg-card/40 p-3">
+            <div className="rounded-2xl border border-border bg-card/40 p-3">
               <nav className="flex flex-col gap-1 text-sm">
                 <AdminNavLink to="/admin" icon={<LayoutDashboard className="h-4 w-4" />} label="داشبورد" exact />
                 <AdminNavLink to="/admin/products" icon={<Package className="h-4 w-4" />} label="محصولات" />
@@ -63,7 +63,7 @@ function AdminNavLink({ to, icon, label, exact }: { to: string; icon: React.Reac
     <Link
       to={to}
       activeOptions={{ exact }}
-      className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground transition hover:bg-white/5 hover:text-foreground"
+      className="flex items-center gap-2 rounded-lg px-3 py-2 text-muted-foreground transition hover:bg-accent/50 hover:text-foreground"
       activeProps={{ className: "bg-primary/15 text-foreground" }}
     >
       {icon}

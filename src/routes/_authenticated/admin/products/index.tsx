@@ -49,9 +49,9 @@ function AdminProductsPage() {
         <Button type="submit" variant="secondary">جستجو</Button>
       </form>
 
-      <div className="overflow-hidden rounded-2xl border border-white/10 bg-card/40">
+      <div className="overflow-hidden rounded-2xl border border-border bg-card/40">
         <table className="w-full text-sm">
-          <thead className="bg-white/5 text-xs text-muted-foreground">
+          <thead className="bg-accent/50 text-xs text-muted-foreground">
             <tr>
               <th className="px-4 py-3 text-right">محصول</th>
               <th className="px-4 py-3 text-right">برند</th>
@@ -69,10 +69,10 @@ function AdminProductsPage() {
               <tr><td colSpan={6} className="px-4 py-10 text-center text-muted-foreground">محصولی پیدا نشد.</td></tr>
             )}
             {data?.rows.map((p: any) => (
-              <tr key={p.id} className="border-t border-white/10">
+              <tr key={p.id} className="border-t border-border">
                 <td className="px-4 py-3">
                   <div className="flex items-center gap-3">
-                    <div className="h-10 w-10 overflow-hidden rounded-lg bg-white/5">
+                    <div className="h-10 w-10 overflow-hidden rounded-lg bg-accent/50">
                       {p.images?.[0] && <img src={p.images[0]} alt="" className="h-full w-full object-cover" />}
                     </div>
                     <div>
@@ -88,12 +88,12 @@ function AdminProductsPage() {
                   {p.is_active ? (
                     <span className="rounded-full bg-emerald-500/15 px-2 py-0.5 text-xs text-emerald-300">فعال</span>
                   ) : (
-                    <span className="rounded-full bg-white/5 px-2 py-0.5 text-xs text-muted-foreground">غیرفعال</span>
+                    <span className="rounded-full bg-accent/50 px-2 py-0.5 text-xs text-muted-foreground">غیرفعال</span>
                   )}
                 </td>
                 <td className="px-4 py-3">
                   <div className="flex items-center justify-end gap-1">
-                    <Link to="/admin/products/$id" params={{ id: p.id }} className="grid h-8 w-8 place-items-center rounded-lg hover:bg-white/10" aria-label="ویرایش">
+                    <Link to="/admin/products/$id" params={{ id: p.id }} className="grid h-8 w-8 place-items-center rounded-lg hover:bg-accent" aria-label="ویرایش">
                       <Pencil className="h-4 w-4" />
                     </Link>
                     <button onClick={() => handleDelete(p.id, p.title_fa)} className="grid h-8 w-8 place-items-center rounded-lg text-red-400 hover:bg-red-500/10" aria-label="حذف">

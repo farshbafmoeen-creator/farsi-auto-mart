@@ -24,11 +24,11 @@ function AdminDashboard() {
       </div>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
-        <Link to="/admin/products" className="rounded-2xl border border-white/10 bg-card/40 p-5 transition hover:border-primary/40 hover:bg-card/60">
+        <Link to="/admin/products" className="rounded-2xl border border-border bg-card/40 p-5 transition hover:border-primary/40 hover:bg-card/60">
           <h3 className="mb-1 font-bold">مدیریت محصولات</h3>
           <p className="text-sm text-muted-foreground">افزودن، ویرایش و حذف محصولات کاتالوگ</p>
         </Link>
-        <Link to="/admin/orders" className="rounded-2xl border border-white/10 bg-card/40 p-5 transition hover:border-primary/40 hover:bg-card/60">
+        <Link to="/admin/orders" className="rounded-2xl border border-border bg-card/40 p-5 transition hover:border-primary/40 hover:bg-card/60">
           <h3 className="mb-1 font-bold">مدیریت سفارشات</h3>
           <p className="text-sm text-muted-foreground">مشاهده و بروزرسانی وضعیت سفارش‌ها</p>
         </Link>
@@ -39,7 +39,7 @@ function AdminDashboard() {
 
 function StatCard({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
   return (
-    <div className="rounded-2xl border border-white/10 bg-card/40 p-5">
+    <div className="rounded-2xl border border-border bg-card/40 p-5">
       <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary/15 text-primary">{icon}</div>
       <p className="text-xs text-muted-foreground">{label}</p>
       <p className="mt-1 text-2xl font-extrabold">{value}</p>

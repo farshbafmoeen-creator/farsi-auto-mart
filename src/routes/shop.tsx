@@ -125,7 +125,7 @@ function ShopPage() {
                   onChange={(e) => setLocalQ(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && applySearch()}
                   placeholder="نام قطعه یا برند..."
-                  className="glass bg-white/5"
+                  className="glass bg-accent/50"
                 />
                 <Button size="icon" onClick={applySearch} className="shrink-0">
                   <Search className="h-4 w-4" />
@@ -139,7 +139,7 @@ function ShopPage() {
                 <button
                   onClick={() => navigate({ search: (prev: ShopSearch) => ({ ...prev, category: undefined, page: 1 }) })}
                   className={`flex w-full items-center gap-2 rounded-xl px-3 py-2 text-sm transition ${
-                    !search.category ? "bg-primary/15 text-primary font-bold" : "hover:bg-white/5"
+                    !search.category ? "bg-primary/15 text-primary font-bold" : "hover:bg-accent/50"
                   }`}
                 >
                   همه
@@ -151,7 +151,7 @@ function ShopPage() {
                       navigate({ search: (prev: ShopSearch) => ({ ...prev, category: c.slug, page: 1 }) })
                     }
                     className={`flex w-full items-center gap-2 rounded-xl px-3 py-2 text-sm transition ${
-                      search.category === c.slug ? "bg-primary/15 text-primary font-bold" : "hover:bg-white/5"
+                      search.category === c.slug ? "bg-primary/15 text-primary font-bold" : "hover:bg-accent/50"
                     }`}
                   >
                     <span>{c.icon ?? "🔩"}</span>

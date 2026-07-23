@@ -35,7 +35,7 @@ const COLS: { t: string; l: { label: string; to: string }[] }[] = [
 
 export function Footer() {
   return (
-    <footer className="mt-16 border-t border-white/10 glass">
+    <footer className="mt-16 border-t border-border glass">
       <div className="container mx-auto grid grid-cols-1 gap-8 px-4 py-12 md:grid-cols-4">
         <div>
           <div className="flex items-center">
@@ -59,7 +59,7 @@ export function Footer() {
           </div>
         ))}
       </div>
-      <div className="border-t border-white/10 py-6 text-center text-xs text-muted-foreground">
+      <div className="border-t border-border py-6 text-center text-xs text-muted-foreground">
         © {toFa(1404)} پارت‌بازار — تمامی حقوق محفوظ است.
       </div>
     </footer>

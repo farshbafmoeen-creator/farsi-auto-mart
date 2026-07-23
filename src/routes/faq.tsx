@@ -34,7 +34,7 @@ function FaqPage() {
           <p className="mt-3 text-muted-foreground">پاسخ پرسش‌های پرتکرار شما را در این بخش گردآوری کرده‌ایم.</p>
           <Accordion type="single" collapsible className="mt-8 rounded-2xl glass p-2">
             {FAQ.map((f, i) => (
-              <AccordionItem key={i} value={String(i)} className="border-white/10">
+              <AccordionItem key={i} value={String(i)} className="border-border">
                 <AccordionTrigger className="px-4 text-right hover:no-underline">{f.q}</AccordionTrigger>
                 <AccordionContent className="px-4 text-muted-foreground">{f.a}</AccordionContent>
               </AccordionItem>

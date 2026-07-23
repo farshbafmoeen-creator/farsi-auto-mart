@@ -44,7 +44,7 @@ function CartPage() {
               {items.map((item) => (
                 <div
                   key={item.productId}
-                  className="flex items-center gap-4 rounded-2xl glass p-4 transition hover:border-white/20"
+                  className="flex items-center gap-4 rounded-2xl glass p-4 transition hover:border-border"
                 >
                   <Link to="/product/$slug" params={{ slug: item.slug }} className="shrink-0">
                     <img
@@ -65,14 +65,14 @@ function CartPage() {
                   <div className="flex items-center gap-3">
                     <button
                       onClick={() => updateQty(item.productId, item.quantity - 1)}
-                      className="grid h-8 w-8 place-items-center rounded-lg bg-white/5 transition hover:bg-white/10"
+                      className="grid h-8 w-8 place-items-center rounded-lg bg-accent/50 transition hover:bg-accent"
                     >
                       <Minus className="h-3.5 w-3.5" />
                     </button>
                     <span className="w-6 text-center text-sm font-bold">{formatToman(item.quantity)}</span>
                     <button
                       onClick={() => updateQty(item.productId, item.quantity + 1)}
-                      className="grid h-8 w-8 place-items-center rounded-lg bg-white/5 transition hover:bg-white/10"
+                      className="grid h-8 w-8 place-items-center rounded-lg bg-accent/50 transition hover:bg-accent"
                     >
                       <Plus className="h-3.5 w-3.5" />
                     </button>

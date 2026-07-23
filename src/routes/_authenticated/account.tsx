@@ -28,7 +28,7 @@ function AccountPage() {
       <Header />
       <main className="container mx-auto max-w-3xl px-4 py-10">
         <h1 className="mb-6 text-3xl font-extrabold">حساب کاربری</h1>
-        <div className="rounded-2xl border border-white/10 bg-card/40 p-6">
+        <div className="rounded-2xl border border-border bg-card/40 p-6">
           <p className="text-sm text-muted-foreground">ایمیل</p>
           <p className="mb-6 text-lg font-medium">{user.email}</p>
           <div className="flex flex-wrap gap-3">

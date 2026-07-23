@@ -139,7 +139,7 @@ function ProductPage() {
                 <h3 className="mb-4 text-sm font-bold">مشخصات فنی</h3>
                 <dl className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                   {Object.entries(specs).map(([key, value]) => (
-                    <div key={key} className="flex items-center justify-between rounded-xl bg-white/5 px-3 py-2">
+                    <div key={key} className="flex items-center justify-between rounded-xl bg-accent/50 px-3 py-2">
                       <dt className="text-xs text-muted-foreground">{key}</dt>
                       <dd className="text-sm font-bold">{value}</dd>
                     </div>

@@ -100,7 +100,7 @@ export function ImageUpload({
       {value.length > 0 && (
         <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
           {value.map((img, i) => (
-            <div key={i} className="group relative overflow-hidden rounded-lg border border-white/10 bg-white/5">
+            <div key={i} className="group relative overflow-hidden rounded-lg border border-border bg-accent/50">
               <img src={img} alt="" className="aspect-square w-full object-cover" />
               <button
                 type="button"

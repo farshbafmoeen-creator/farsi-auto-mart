@@ -69,7 +69,7 @@ export function ProductForm({
 
   return (
     <form onSubmit={submit} className="space-y-6">
-      <div className="rounded-2xl border border-white/10 bg-card/40 p-5">
+      <div className="rounded-2xl border border-border bg-card/40 p-5">
         <h2 className="mb-4 font-bold">اطلاعات اصلی</h2>
         <div className="grid gap-4 md:grid-cols-2">
           <Field label="عنوان فارسی" required>
@@ -88,7 +88,7 @@ export function ProductForm({
             <select
               value={v.category_id ?? ""}
               onChange={(e) => set("category_id", e.target.value || null)}
-              className="h-10 w-full rounded-md border border-white/10 bg-background px-3 text-sm"
+              className="h-10 w-full rounded-md border border-border bg-background px-3 text-sm"
             >
               <option value="">— بدون دسته —</option>
               {categories.map((c) => (
@@ -101,13 +101,13 @@ export function ProductForm({
               value={v.description_fa ?? ""}
               onChange={(e) => set("description_fa", e.target.value)}
               rows={4}
-              className="w-full rounded-md border border-white/10 bg-background p-3 text-sm"
+              className="w-full rounded-md border border-border bg-background p-3 text-sm"
             />
           </Field>
         </div>
       </div>
 
-      <div className="rounded-2xl border border-white/10 bg-card/40 p-5">
+      <div className="rounded-2xl border border-border bg-card/40 p-5">
         <h2 className="mb-4 font-bold">قیمت و موجودی</h2>
         <div className="grid gap-4 md:grid-cols-3">
           <Field label="قیمت (تومان)" required>
@@ -122,12 +122,12 @@ export function ProductForm({
         </div>
       </div>
 
-      <div className="rounded-2xl border border-white/10 bg-card/40 p-5">
+      <div className="rounded-2xl border border-border bg-card/40 p-5">
         <h2 className="mb-4 font-bold">تصاویر</h2>
         <ImageUpload value={v.images} onChange={(imgs) => set("images", imgs)} />
       </div>
 
-      <div className="rounded-2xl border border-white/10 bg-card/40 p-5">
+      <div className="rounded-2xl border border-border bg-card/40 p-5">
         <h2 className="mb-4 font-bold">وضعیت</h2>
         <div className="flex flex-wrap gap-6">
           <label className="flex items-center gap-2 text-sm">

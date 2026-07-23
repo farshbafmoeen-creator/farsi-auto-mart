@@ -70,16 +70,16 @@ function HomePage() {
           <div className="mx-auto mt-10 max-w-3xl rounded-3xl glass-strong p-2 shadow-elegant animate-fade-up" style={{ animationDelay: "0.3s" }}>
             <div className="grid grid-cols-1 gap-2 md:grid-cols-[1fr_1fr_auto]">
               <div className="relative">
-                <select className="w-full appearance-none rounded-2xl bg-white/5 px-4 py-4 text-right text-sm outline-none focus:bg-white/10">
+                <select className="w-full appearance-none rounded-2xl bg-accent/50 px-4 py-4 text-right text-sm outline-none focus:bg-accent">
                   <option>برند خودرو را انتخاب کنید</option>
                   {data.makes.map((m) => <option key={m.id} value={m.slug}>{m.name_fa}</option>)}
                 </select>
                 <ChevronDown className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               </div>
               <div className="relative">
-                <input placeholder="نام قطعه، برند یا کد فنی" className="w-full rounded-2xl bg-white/5 px-4 py-4 text-right text-sm outline-none placeholder:text-muted-foreground focus:bg-white/10" />
+                <input placeholder="نام قطعه، برند یا کد فنی" className="w-full rounded-2xl bg-accent/50 px-4 py-4 text-right text-sm outline-none placeholder:text-muted-foreground focus:bg-accent" />
               </div>
-              <button className="flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-primary to-[oklch(0.75_0.20_45)] px-6 py-4 text-sm font-bold text-primary-foreground glow-primary transition hover:scale-105">
+              <button className="flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-primary to-[oklch(0.55_0.17_258)] px-6 py-4 text-sm font-bold text-primary-foreground glow-primary transition hover:scale-105">
                 <Search className="h-4 w-4" />
                 جستجو
               </button>

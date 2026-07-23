@@ -106,7 +106,7 @@ function ContactPage() {
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
                   required
-                  className="w-full rounded-md border border-white/10 bg-background p-3 text-sm"
+                  className="w-full rounded-md border border-border bg-background p-3 text-sm"
                 />
               </label>
             </div>

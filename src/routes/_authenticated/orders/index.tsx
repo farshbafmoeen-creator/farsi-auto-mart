@@ -51,7 +51,7 @@ function OrdersPage() {
         {isLoading && <p className="text-muted-foreground">در حال بارگذاری…</p>}
 
         {!isLoading && (!data || data.length === 0) && (
-          <div className="rounded-3xl border border-white/10 bg-card/40 p-10 text-center">
+          <div className="rounded-3xl border border-border bg-card/40 p-10 text-center">
             <Package className="mx-auto h-10 w-10 text-muted-foreground" />
             <p className="mt-4 text-muted-foreground">هنوز سفارشی ثبت نکرده‌اید.</p>
             <Link to="/shop">
@@ -67,7 +67,7 @@ function OrdersPage() {
                 <Link
                   to="/orders/$id"
                   params={{ id: o.id }}
-                  className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-white/10 bg-card/40 p-4 transition hover:border-primary/40 hover:bg-card/60"
+                  className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-border bg-card/40 p-4 transition hover:border-primary/40 hover:bg-card/60"
                 >
                   <div>
                     <div className="font-mono text-sm font-bold">{o.order_number}</div>
