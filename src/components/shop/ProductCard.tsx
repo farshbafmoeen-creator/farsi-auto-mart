@@ -31,7 +31,7 @@ export function ProductCard({ productId, title_fa, brand, price, compare_at_pric
   };
 
   return (
-    <Link to="/product/$slug" params={{ slug }} className="group block overflow-hidden rounded-2xl glass transition-all duration-500 hover:-translate-y-1 hover:shadow-elegant hover:border-white/25">
+    <Link to="/product/$slug" params={{ slug }} className="group block overflow-hidden rounded-2xl glass transition-all duration-500 hover:-translate-y-1 hover:shadow-elegant hover:border-primary/40">
       <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-white/5 to-transparent">
         <img
           src={images[0] ?? "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600"}
