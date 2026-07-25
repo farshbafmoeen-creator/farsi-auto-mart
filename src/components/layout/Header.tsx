@@ -1,9 +1,10 @@
 import { Link, useNavigate } from "@tanstack/react-router";
-import { ShoppingCart, Search, User, Menu, X, ChevronDown } from "lucide-react";
+import { ShoppingCart, Search, User, Menu, ChevronDown, Sun, Moon } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { useCart } from "@/lib/cart-context";
+import { useTheme } from "@/lib/theme-context";
 import { toFa } from "@/lib/fa";
 import { getCategories, getCarMakes } from "@/lib/products.functions";
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
@@ -12,11 +13,13 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import logoFull from "@/assets/logo-full.png.asset.json";
+import logoFullDark from "@/assets/logo-full-dark.png.asset.json";
 
 
 
 export function Header() {
   const { totalItems } = useCart();
+  const { theme, toggle: toggleTheme } = useTheme();
   const navigate = useNavigate();
   const [searchOpen, setSearchOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -47,7 +50,8 @@ export function Header() {
       <div className="container mx-auto flex h-16 items-center justify-between gap-4 px-4">
         <div className="flex items-center gap-8">
           <Link to="/" className="flex items-center" aria-label="پارت‌بازار">
-            <img src={logoFull.url} alt="پارت‌بازار" className="h-10 w-auto" />
+            <img src={logoFullDark.url} alt="پارت‌بازار" className="h-10 w-auto dark:hidden" />
+            <img src={logoFull.url} alt="پارت‌بازار" className="hidden h-10 w-auto dark:block" />
           </Link>
 
 
