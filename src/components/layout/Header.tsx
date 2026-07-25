@@ -143,6 +143,14 @@ export function Header() {
         </div>
 
         <div className="flex items-center gap-2">
+          <button
+            onClick={toggleTheme}
+            className="grid h-10 w-10 place-items-center rounded-xl glass transition hover:bg-accent"
+            aria-label={theme === "dark" ? "حالت روشن" : "حالت تیره"}
+          >
+            {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+          </button>
+
           {/* Search dialog */}
           <Dialog open={searchOpen} onOpenChange={setSearchOpen}>
             <DialogTrigger asChild>

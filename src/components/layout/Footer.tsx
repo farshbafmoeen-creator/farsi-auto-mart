@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { toFa } from "@/lib/fa";
 import logoFull from "@/assets/logo-full.png.asset.json";
+import logoFullDark from "@/assets/logo-full-dark.png.asset.json";
 
 
 const COLS: { t: string; l: { label: string; to: string }[] }[] = [
@@ -39,7 +40,8 @@ export function Footer() {
       <div className="container mx-auto grid grid-cols-1 gap-8 px-4 py-12 md:grid-cols-4">
         <div>
           <div className="flex items-center">
-            <img src={logoFull.url} alt="پارت‌بازار" className="h-12 w-auto" />
+            <img src={logoFullDark.url} alt="پارت‌بازار" className="h-12 w-auto dark:hidden" />
+            <img src={logoFull.url} alt="پارت‌بازار" className="hidden h-12 w-auto dark:block" />
           </div>
           <p className="mt-4 text-sm text-muted-foreground">مرجع تخصصی قطعات یدکی خودرو در ایران.</p>
         </div>
