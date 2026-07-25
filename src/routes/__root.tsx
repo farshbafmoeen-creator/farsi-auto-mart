@@ -12,6 +12,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { CartProvider } from "@/lib/cart-context";
+import { ThemeProvider } from "@/lib/theme-context";
 import faviconAsset from "@/assets/favicon.png.asset.json";
 import logoFullAsset from "@/assets/logo-full.png.asset.json";
 
@@ -90,9 +91,11 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   return (
     <QueryClientProvider client={queryClient}>
-      <CartProvider>
-        <Outlet />
-      </CartProvider>
+      <ThemeProvider>
+        <CartProvider>
+          <Outlet />
+        </CartProvider>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }
